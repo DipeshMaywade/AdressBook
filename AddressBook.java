@@ -1,5 +1,7 @@
+import java.util.Scanner;
 
-public class AddressBook {
+public class AddressBook{
+
         private final String firstName;
         private final String lastName;
         private final String address;
@@ -9,28 +11,35 @@ public class AddressBook {
         private final String phone;
         private final String email;
 
-
-        public AddressBook(String firstName, String lastName, String address, String city,
-                               String state, String zip, String phone, String email) {
-            this.firstName = firstName;
-            this.lastName = lastName;
-            this.address = address;
-            this.city = city;
-            this.state = state;
-            this.zip = zip;
-            this.phone = phone;
-            this.email = email;
+        public AddressBook() {
+            Scanner sc = new Scanner(System.in);
+            System.out.println("Enter First Name");
+            this.firstName = sc.next();
+            System.out.println("Enter last Name");
+            this.lastName = sc.next();
+            System.out.println("Enter Address");
+            this.address = sc.next();
+            System.out.println("Enter Your City Name");
+            this.city = sc.next();
+            System.out.println("Enter Your State");
+            this.state = sc.next();
+            System.out.println("Enter Zip");
+            this.zip = sc.next();
+            System.out.println("Enter Phone Number");
+            this.phone = sc.next();
+            System.out.println("Enter Email");
+            this.email = sc.next();
         }
+
         public String toString(){
             return "First Name:"+firstName+"\nLast Name:"+lastName+"\nAddress:"+address+
-                     "\nState:"+state+"\nCity:"+city+"\nZIP:"+zip+"\nPhone:"+phone+"\nEmail:"+email;
+                "\nState:"+state+"\nCity:"+city+"\nZIP:"+zip+"\nPhone:"+phone+"\nEmail:"+email;
         }
 
         public static void main(String[] args) {
-            AddressBook obj = new AddressBook("Dipesh", "Maywade", "Betul", "Betul",
-                    "MadhyaPradesh", "460001", "8269602271", "dipshmaywade@gmail.com");
-
+            AddressBook obj = new AddressBook();
             System.out.println(obj.toString());
         }
 }
+
 
