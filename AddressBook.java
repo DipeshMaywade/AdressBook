@@ -32,13 +32,27 @@ public class AddressBook{
         }
 
         public String toString(){
-            return "First Name:"+firstName+"\nLast Name:"+lastName+"\nAddress:"+address+
-                "\nState:"+state+"\nCity:"+city+"\nZIP:"+zip+"\nPhone:"+phone+"\nEmail:"+email;
+            return "First Name:"+firstName+", Last Name:"+lastName+", Address:"+address+
+                    ", State:"+state+", City:"+city+", ZIP:"+zip+", Phone:"+phone+", Email:"+email;
         }
 
+
         public static void main(String[] args) {
-            AddressBook obj = new AddressBook();
-            System.out.println(obj.toString());
+            Scanner sc = new Scanner(System.in);
+            System.out.println("Enter Number Of Entry U Want");
+            int noOfEntry = sc.nextInt();
+
+            String list[] = new String[noOfEntry];
+
+            for (int i=0; i<noOfEntry; i++) {
+                System.out.println("Enter Value For contact No."+(i+1));
+                AddressBook obj = new AddressBook();
+                String contactDetails = obj.toString();
+                list[i]=contactDetails;
+            }
+            for (int i=0; i<noOfEntry; i++){
+                System.out.println(list[i]);
+            }
         }
 }
 
