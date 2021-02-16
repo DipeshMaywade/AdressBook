@@ -27,8 +27,8 @@ class Entry{
         }
 
         public String toString(){
-            return "First Name:"+firstName+"\nLast Name:"+lastName+"\nAddress:"+address+
-                    "\nState:"+state+"\nCity:"+city+"\nZIP:"+zip+"\nPhone:"+phone+"\nEmail:"+email;
+            return "First Name:"+firstName+",  Last Name:"+lastName+",  Address:"+address+
+                    ",  State:"+state+",  City:"+city+",  ZIP:"+zip+",  Phone:"+phone+",  Email:"+email;
         }
 
 
@@ -60,8 +60,9 @@ class Entry{
             if (Objects.equals(list[i].firstName, name))
                 list[i] = new Entry(firstName, lastName, address, city, state, zip, phone, email);
             else
-                System.out.println("Person Not found at Entry");
+                System.out.println("Person Not found at " +(i+1)+" Entry");
         }
+
     }
 //Deleted an entry from the book according to the name
     public void deleteEntry(String name) {
@@ -97,6 +98,8 @@ public class AddressBook {
         int choice;
         while (true) {
             System.out.println("WelCome To AddressBook");
+
+            //Multiple entries in AdressBook
             for (int i = 0; i < entry.getLength(); i++) {
                 System.out.println("===========Entry Format===========");
                 System.out.println(entry.list[i]); //Accessing the array of entries INSIDE the array of books/the book
