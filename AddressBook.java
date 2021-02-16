@@ -1,4 +1,3 @@
-import java.util.Arrays;
 import java.util.Objects;
 import java.util.Scanner;
 
@@ -81,6 +80,7 @@ class Entry{
     }
 
 }
+
 public class AddressBook {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -157,7 +157,6 @@ public class AddressBook {
                     break;
                 default:
                     System.out.print("Invalid Choice");
-                    break;
             }
         }
     }
