@@ -1,91 +1,14 @@
-import java.util.Objects;
 import java.util.Scanner;
 
-class Entry{
-    private final String firstName;
-    private final String lastName;
-    private final String address;
-    private final String city;
-    private final String state;
-    private final String zip;
-    private final String phone;
-    private final String email;
-
-    Entry(String firstName, String lastName, String address, String city, String state, String zip, String phone, String email){
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.address = address;
-        this.city = city;
-        this.state = state;
-        this.zip = zip;
-        this.phone = phone;
-        this.email = email;
-        }
-
-        Entry(){
-            this("","","","","","","","");
-        }
-
-        public String toString(){
-            return "First Name:"+firstName+",  Last Name:"+lastName+",  Address:"+address+
-                    ",  State:"+state+",  City:"+city+",  ZIP:"+zip+",  Phone:"+phone+",  Email:"+email;
-        }
-
-
-    //Keeps track of how many entries are in the book
-    private int entries = 0;
-    Entry[] list;
-    public void initEntries(int e){
-        list = new Entry[e];
-        for (int i = 0;i<list.length;i++){      //Initializes an array of entries, then loops through to initialize each individual entry
-            list[i] = new Entry();
-        }
-    }
-    // Returns the length
-    public int getLength(){
-        return list.length;
-    }
-
-    //Adds an entry to the book
-    public void addEntry(String firstName, String lastName, String address, String city,
-                         String state, String zip, String phone, String email){
-        list[entries] = new Entry(firstName, lastName, address, city, state, zip, phone, email);
-        entries++;
-    }
-
-    //Edits the values of an entry according to the name
-    public void editEntry(String firstName, String lastName, String address, String city,
-                          String state, String zip, String phone, String email, String name){
-        for (int i=0; i<list.length; i++) {
-            if (Objects.equals(list[i].firstName, name))
-                list[i] = new Entry(firstName, lastName, address, city, state, zip, phone, email);
-            else
-                System.out.println("Person Not found at " +(i+1)+" Entry");
-        }
-
-    }
-//Deleted an entry from the book according to the name
-    public void deleteEntry(String name) {
-        if (entries>0){
-            Entry[] removedArray = new Entry[list.length];
-            for (int i = 0, k = 0 ;i<list.length;i++){
-                if (Objects.equals(list[i].firstName, name)){
-                    continue;
-                }
-                removedArray[k++] = list[i];
-            }
-            System.arraycopy(removedArray, 0, list, 0, entries);
-
-        }
-        else System.out.println("Error: book is empty.");
-    }
-
-}
-
-public class AddressBook {
+class AddressBook{
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        Entry entry = new Entry();
+        MainImplement entry = new MainImplement() {
+            @Override
+            public void MainImplement(String firstName, String lastName, String address, String city, String state, String zip, String phone, String email) {
+            }
+        };
+
         while (true) {
             System.out.print("How Many Entries U Want In AddressBook ");
             int numOfEntry = sc.nextInt();
@@ -164,5 +87,3 @@ public class AddressBook {
         }
     }
 }
-
-
