@@ -1,21 +1,18 @@
 import java.util.Scanner;
-
 public interface DataEntry {
 
-    void MainImplement(String firstName, String lastName, String address, String city, String state, String zip, String phone, String email);
+    String toString();
 
-    public String toString();
+    void initEntries(int e);
 
-    public void initEntries(int e);
+    int getLength();
 
-    public int getLength();
-
-    public void addEntry(String firstName, String lastName, String address, String city,
+    void addEntry(String firstName, String lastName, String address, String city,
                          String state, String zip, String phone, String email);
 
-    public void editEntry(String firstName, String lastName, String address, String city,
+    void editEntry(String firstName, String lastName, String address, String city,
                           String state, String zip, String phone, String email, String name);
 
-    public void deleteEntry(String name);
+    void deleteEntry(String name);
 }
 
