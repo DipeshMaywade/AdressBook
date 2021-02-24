@@ -1,6 +1,6 @@
 public class AddressBookMain {
     public static void main(String[] args){
-        MultipleAddressBook bookBuilder=new AddressBookImplement();
+        AddressBookImplement bookBuilder=new AddressBookImplement();
         bookBuilder.makeChoice();
         boolean conditon=true;
         while (conditon) {

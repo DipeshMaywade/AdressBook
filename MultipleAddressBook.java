@@ -3,9 +3,13 @@ interface MultipleAddressBook {
 
     public void getAddressBookByName();
 
+    public boolean uniqBook(String bookName );
+
     public void getContactByName();
 
     public void getContact();
+
+    public boolean UniqContact(String firstName );
 
     public void editContact();
 

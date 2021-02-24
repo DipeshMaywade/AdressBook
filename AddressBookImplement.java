@@ -18,36 +18,64 @@ public class AddressBookImplement implements MultipleAddressBook {
 
     @Override
     public void addAddressBook(String BookName,String FirstName, String LastName, String Address, String City, int Zip,String State, long PhoneNumber, String Email){
-
         AddressBook adder=new AddressBook(BookName,FirstName,LastName,Address,City,Zip,State,PhoneNumber,Email);
+        if(uniqBook(BookName)) {
+            contact.put(FirstName, adder);
+            book.put(BookName, adder);
+        }
+        else {
+            System.out.println("The BookName Is Already Exist Please Use Diff Name For Book");
+        }
+    }
 
-        contact.put(FirstName,adder);
-        book.put(BookName,adder);
+    @Override
+    public boolean uniqBook(String bookName ){
+        AddressBook details = book.get(bookName);
+        if (details == null){
+            return true;
+        }
+        return false;
     }
 
     //This method takes console arguments
     @Override
     public void getContact() {
-        Scanner obj = new Scanner(System.in);
+        Scanner scan = new Scanner(System.in);
+
         System.out.println("Enter Address Book Name");
-        String BookName = obj.next();
+        String BookName = scan.next();
         System.out.println("Enter you first name");
-        String FirstName = obj.next();
-        System.out.println("Enter you last name");
-        String LastName = obj.next();
-        System.out.println("Enter you Address name");
-        String Address = obj.next();
-        System.out.println("Enter you zip ");
-        int Zip = obj.nextInt();
-        System.out.println("Enter you city name");
-        String City = obj.next();
-        System.out.println("Enter you state name");
-        String State = obj.next();
-        System.out.println("Enter you phone number");
-        long PhoneNumber = obj.nextLong();
-        System.out.println("Enter you email name");
-        String Email = obj.next();
-        addAddressBook(BookName,FirstName,LastName,Address,City,Zip,State,PhoneNumber,Email);
+        String FirstName = scan.next();
+
+        if(UniqContact(FirstName)) {
+            System.out.println("Enter you last name");
+            String LastName = scan.next();
+            System.out.println("Enter you Address name");
+            String Address = scan.next();
+            System.out.println("Enter you zip ");
+            int Zip = scan.nextInt();
+            System.out.println("Enter you city name");
+            String City = scan.next();
+            System.out.println("Enter you state name");
+            String State = scan.next();
+            System.out.println("Enter you phone number");
+            long PhoneNumber = scan.nextLong();
+            System.out.println("Enter you email name");
+            String Email = scan.next();
+            addAddressBook(BookName, FirstName, LastName, Address, City, Zip, State, PhoneNumber, Email);
+        }
+        else {
+            System.out.println("The Name Is Already Exist Please Use Diff Name");
+        }
+    }
+
+    @Override
+    public boolean UniqContact(String firstName ){
+        AddressBook details = contact.get(firstName);
+        if (details == null){
+            return true;
+        }
+        return false;
     }
 
     // This method helps to edit the details
