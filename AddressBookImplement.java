@@ -1,4 +1,5 @@
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class AddressBookImplement implements MultipleAddressBook {
     public Map<String, ArrayList<AddressBook>> book;
@@ -6,6 +7,7 @@ public class AddressBookImplement implements MultipleAddressBook {
     public Map<String, ArrayList<AddressBook>> city;
     public Map<String, ArrayList<AddressBook>> state;
     public ArrayList<AddressBook> entries;
+    public int count = 0;
     Scanner obj = new Scanner(System.in);
 
     // Constructor
@@ -26,6 +28,7 @@ public class AddressBookImplement implements MultipleAddressBook {
         multibook.put(BookName, entries);
         city.put(City, entries);
         state.put(State, entries);
+        count++;
     }
 
     //This method takes console arguments
@@ -152,7 +155,7 @@ public class AddressBookImplement implements MultipleAddressBook {
     // This method helps user to choose action
     public boolean makechoice() {
         System.out.println("enter 1:add_contact 2:view_by_city 3-view_by_state 4:edit_contact 5:delete_contact" +
-                " 6:person_by_city_or_state or 0 to quit");
+                " 6:person_by_city_or_state 7:get_count_of_person or 0 to quit");
         int check = obj.nextInt();
         boolean conditon = true;
         switch (check) {
@@ -174,6 +177,9 @@ public class AddressBookImplement implements MultipleAddressBook {
             case 6:
                 getContactByCityOrState();
                 break;
+            case 7:
+                getCountOfPersons();
+                break;
             case 0:
                 conditon = false;
                 break;
@@ -183,43 +189,43 @@ public class AddressBookImplement implements MultipleAddressBook {
         return conditon;
     }
 
+    private void getCountOfPersons() {
+        System.out.println("total count is " + count);
+    }
+
     public void viewPersonByCity() {
         System.out.println("Enter city");
         String location = obj.next();
         obj.nextLine();
-        int flag = 1;
-        for (String entry : city.keySet()) {
-            if (entry.equals(location)) System.out.println(entries);
-            flag = 0;
-        }
-        if (flag == 1) System.out.println("no records found");
+        List exit = city.get(location);
+        if (exit != null)
+            System.out.println(city.get(location));
+        else
+            System.out.println("no records found");
     }
 
     public void viewPersonByState() {
         System.out.println("Enter state");
         String location = obj.next();
         obj.nextLine();
-        int flag = 1;
-        for (String entry : state.keySet()) {
-            if (entry.equals(location)) System.out.println(entries);
-            flag = 0;
-        }
-        if (flag == 1) System.out.println("no records found");
+        List exit = state.get(location);
+        if (exit != null)
+            System.out.println(state.get(location));
+        else
+            System.out.println("no records found");
     }
 
     public void getContactByCityOrState() {
         System.out.println("Enter city or state");
         String location = obj.next();
         obj.nextLine();
-        int flag = 1;
-        for (String entry : multibook.keySet()) {
-            for (AddressBook item : multibook.get(entry)) {
-                if (item.State.equals(location) || item.City.equals(location)) {
-                    System.out.println(item);
-                    flag = 0;
-                }
-            }
-        }
-        if (flag == 1) System.out.println("no records found");
+        List check1 = state.get(location);
+        List check2 = city.get(location);
+        if (check1 != null)
+            System.out.println(state.get(location));
+        else if (check2 != null)
+            System.out.println(city.get(location));
+        else
+            System.out.println("no records found");
     }
 }

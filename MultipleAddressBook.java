@@ -17,6 +17,8 @@ interface MultipleAddressBook {
 
     public boolean makechoice();
 
+    public void getContactByCityOrState();
+
 }
 
 class AddressBook {
