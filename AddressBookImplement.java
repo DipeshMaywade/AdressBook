@@ -1,14 +1,12 @@
 import java.util.*;
 
 public class AddressBookImplement implements MultipleAddressBook {
-
-    Scanner obj = new Scanner(System.in);
-
     public Map<String, ArrayList<AddressBook>> book;
     public Map<String, ArrayList<AddressBook>> multibook;
     public Map<String, ArrayList<AddressBook>> city;
     public Map<String, ArrayList<AddressBook>> state;
     public ArrayList<AddressBook> entries;
+    Scanner obj = new Scanner(System.in);
 
     // Constructor
     public AddressBookImplement() {
@@ -37,29 +35,27 @@ public class AddressBookImplement implements MultipleAddressBook {
         String BookName = obj.next();
         System.out.println("Enter you first name");
         String FirstName = obj.next();
-        if (equals(FirstName)) {
-            System.out.println("Enter you last name");
-            String LastName = obj.next();
-            obj.nextLine();
-            System.out.println("Enter you Address name");
-            String Address = obj.nextLine();
-            System.out.println("Enter you zip ");
-            int Zip = obj.nextInt();
-            System.out.println("Enter you city name");
-            String City = obj.next();
-            System.out.println("Enter you state name");
-            String State = obj.next();
-            obj.nextLine();
-            System.out.println("Enter you phone number");
-            long PhoneNumber = obj.nextLong();
-            obj.nextLine();
-            System.out.println("Enter you email name");
-            String Email = obj.nextLine();
+        System.out.println("Enter you last name");
+        String LastName = obj.next();
+        obj.nextLine();
+        System.out.println("Enter you Address name");
+        String Address = obj.nextLine();
+        System.out.println("Enter you zip ");
+        int Zip = obj.nextInt();
+        System.out.println("Enter you city name");
+        String City = obj.next();
+        System.out.println("Enter you state name");
+        String State = obj.next();
+        obj.nextLine();
+        System.out.println("Enter you phone number");
+        long PhoneNumber = obj.nextLong();
+        obj.nextLine();
+        System.out.println("Enter you email name");
+        String Email = obj.nextLine();
+        if (equals(FirstName))
             addAddressBook(BookName, FirstName, LastName, Address, City, Zip, State, PhoneNumber, Email);
-        }
-            else {
+        else
             System.out.println("the Name already exist in contact please use different name");
-        }
     }
 
     @Override
@@ -154,7 +150,7 @@ public class AddressBookImplement implements MultipleAddressBook {
     }
 
     // This method helps user to choose action
-    public boolean makeChoice() {
+    public boolean makechoice() {
         System.out.println("enter 1:add_contact 2:view_by_city 3-view_by_state 4:edit_contact 5:delete_contact" +
                 " 6:person_by_city_or_state or 0 to quit");
         int check = obj.nextInt();
@@ -164,10 +160,10 @@ public class AddressBookImplement implements MultipleAddressBook {
                 getContact();
                 break;
             case 2:
-//                viewPersonByCity();
+                viewPersonByCity();
                 break;
             case 3:
-//                viewPersonByState();
+                viewPersonByState();
                 break;
             case 4:
                 editContact();
@@ -185,6 +181,30 @@ public class AddressBookImplement implements MultipleAddressBook {
                 System.out.println("invalid input");
         }
         return conditon;
+    }
+
+    public void viewPersonByCity() {
+        System.out.println("Enter city");
+        String location = obj.next();
+        obj.nextLine();
+        int flag = 1;
+        for (String entry : city.keySet()) {
+            if (entry.equals(location)) System.out.println(entry);
+            flag = 0;
+        }
+        if (flag == 1) System.out.println("no records found");
+    }
+
+    public void viewPersonByState() {
+        System.out.println("Enter state");
+        String location = obj.next();
+        obj.nextLine();
+        int flag = 1;
+        for (String entry : state.keySet()) {
+            if (entry.equals(location)) System.out.println(entry);
+            flag = 0;
+        }
+        if (flag == 1) System.out.println("no records found");
     }
 
     public void getContactByCityOrState() {
