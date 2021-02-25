@@ -189,7 +189,7 @@ public class AddressBookImplement implements MultipleAddressBook {
         obj.nextLine();
         int flag = 1;
         for (String entry : city.keySet()) {
-            if (entry.equals(location)) System.out.println(entry);
+            if (entry.equals(location)) System.out.println(entries);
             flag = 0;
         }
         if (flag == 1) System.out.println("no records found");
@@ -201,7 +201,7 @@ public class AddressBookImplement implements MultipleAddressBook {
         obj.nextLine();
         int flag = 1;
         for (String entry : state.keySet()) {
-            if (entry.equals(location)) System.out.println(entry);
+            if (entry.equals(location)) System.out.println(entries);
             flag = 0;
         }
         if (flag == 1) System.out.println("no records found");
