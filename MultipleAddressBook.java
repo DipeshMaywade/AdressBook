@@ -13,6 +13,16 @@ interface MultipleAddressBook {
 
     public boolean makeChoice();
 
+    public void viewPersonByCity();
+
+    public void viewPersonByState();
+
+    public void getContactByCityOrState();
+
+    public void sortAlphabetically();
+
+    public void sortCityStateOrZip();
+
 }
 
 class AddressBook {
