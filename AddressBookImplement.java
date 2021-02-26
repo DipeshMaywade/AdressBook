@@ -2,10 +2,11 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class AddressBookImplement implements MultipleAddressBook {
-    public Map<String, ArrayList<AddressBook>> book;
+    public Map<String, AddressBook> book;
     public Map<String, ArrayList<AddressBook>> multibook;
     public Map<String, ArrayList<AddressBook>> city;
     public Map<String, ArrayList<AddressBook>> state;
+    public Map<Integer, ArrayList<AddressBook>> zip;
     public ArrayList<AddressBook> entries;
     public int count = 0;
     Scanner obj = new Scanner(System.in);
@@ -16,18 +17,21 @@ public class AddressBookImplement implements MultipleAddressBook {
         multibook = new HashMap<>();
         city = new HashMap<>();
         state = new HashMap<>();
+        zip = new HashMap<>();
         entries = new ArrayList<>();
     }
 
+
     @Override
-    public void addAddressBook(String BookName, String FirstName, String LastName, String Address, String City, int Zip,
-                               String State, long PhoneNumber, String Email) {
-        AddressBook adder = new AddressBook(BookName, FirstName, LastName, Address, City, Zip, State, PhoneNumber, Email);
+    public void addAddressBook(String bookName, String firstName, String lastName, String address, String city, int zip,
+                               String state, long phoneNumber, String email) {
+        AddressBook adder = new AddressBook(bookName, firstName, lastName, address, city, zip, state, phoneNumber, email);
         entries.add(adder);
-        book.put(FirstName, entries);
-        multibook.put(BookName, entries);
-        city.put(City, entries);
-        state.put(State, entries);
+        book.put(firstName, adder);
+        multibook.put(bookName, entries);
+        this.city.put(city, entries);
+        this.state.put(state, entries);
+        this.zip.put(zip, entries);
         count++;
     }
 
@@ -35,35 +39,35 @@ public class AddressBookImplement implements MultipleAddressBook {
     @Override
     public void getContact() {
         System.out.println("Enter Address Book Name");
-        String BookName = obj.next();
+        String bookName = obj.next();
         System.out.println("Enter you first name");
-        String FirstName = obj.next();
+        String firstName = obj.next();
         System.out.println("Enter you last name");
-        String LastName = obj.next();
+        String lastName = obj.next();
         obj.nextLine();
         System.out.println("Enter you Address name");
-        String Address = obj.nextLine();
+        String address = obj.nextLine();
         System.out.println("Enter you zip ");
-        int Zip = obj.nextInt();
+        int zip = obj.nextInt();
         System.out.println("Enter you city name");
-        String City = obj.next();
+        String city = obj.next();
         System.out.println("Enter you state name");
-        String State = obj.next();
+        String state = obj.next();
         obj.nextLine();
         System.out.println("Enter you phone number");
-        long PhoneNumber = obj.nextLong();
+        long phoneNumber = obj.nextLong();
         obj.nextLine();
         System.out.println("Enter you email name");
-        String Email = obj.nextLine();
-        if (equals(FirstName))
-            addAddressBook(BookName, FirstName, LastName, Address, City, Zip, State, PhoneNumber, Email);
+        String email = obj.nextLine();
+        if (equals(firstName))
+            addAddressBook(bookName, firstName, lastName, address, city, zip, state, phoneNumber, email);
         else
             System.out.println("the Name already exist in contact please use different name");
     }
 
     @Override
     public boolean equals(String firstName) {
-        List<AddressBook> details = book.get(firstName);
+        AddressBook details = book.get(firstName);
         if (details == null) return true;
         return false;
     }
@@ -77,7 +81,7 @@ public class AddressBookImplement implements MultipleAddressBook {
         System.out.println("enter your name");
         String name = obj.next();
         for (AddressBook details : option) {
-            if (details.FirstName.equals(name)) {
+            if (details.firstName.equals(name)) {
                 boolean conditon = true;
                 while (conditon) {
                     System.out.println("enter number  1:first_name 2:last_name 3:address 4:City 5:zip 6:state 7:phone_number" +
@@ -87,50 +91,50 @@ public class AddressBookImplement implements MultipleAddressBook {
                         case 1:
                             System.out.println("Enter you first name");
                             String firstname = obj.next();
-                            details.FirstName = firstname;
+                            details.firstName = firstname;
                             System.out.println(book);
                             break;
                         case 2:
                             System.out.println("Enter you last name");
                             String lastname = obj.next();
-                            details.FirstName = lastname;
+                            details.firstName = lastname;
                             System.out.println(book);
                             break;
                         case 3:
                             System.out.println("Enter you address ");
                             String addressname = obj.next();
-                            details.Address = addressname;
+                            details.address = addressname;
                             System.out.println(book);
                             break;
                         case 4:
                             System.out.println("Enter you City name");
                             String cityname = obj.next();
-                            details.City = cityname;
+                            details.city = cityname;
                             System.out.println(book);
                             break;
                         case 5:
                             System.out.println("Enter you Zip name");
                             int zipname = obj.nextInt();
-                            details.Zip = zipname;
+                            details.zip = zipname;
                             System.out.println(book);
                             break;
                         case 6:
                             System.out.println("Enter you State name");
                             String statename = obj.next();
-                            details.State = statename;
+                            details.state = statename;
                             System.out.println(book);
                             break;
                         case 7:
                             System.out.println("Enter you Phone number");
                             long phonenumber = obj.nextLong();
                             obj.nextLine();
-                            details.PhoneNumber = phonenumber;
+                            details.phoneNumber = phonenumber;
                             System.out.println(book);
                             break;
                         case 8:
                             System.out.println("Enter you email");
                             String emailname = obj.next();
-                            details.Email = emailname;
+                            details.email = emailname;
                             System.out.println(book);
                             break;
                         case 0:
@@ -153,9 +157,9 @@ public class AddressBookImplement implements MultipleAddressBook {
     }
 
     // This method helps user to choose action
-    public boolean makechoice() {
+    public boolean makeChoice() {
         System.out.println("enter 1:add_contact 2:view_by_city 3-view_by_state 4:edit_contact 5:delete_contact" +
-                " 6:person_by_city_or_state 7:get_count_of_person or 0 to quit");
+                " 6:person_by_city_or_state 7:get_count_of_person 8:sort_alphabetically 9:sort_viaCityStateZip or 0 to quit");
         int check = obj.nextInt();
         boolean conditon = true;
         switch (check) {
@@ -179,6 +183,12 @@ public class AddressBookImplement implements MultipleAddressBook {
                 break;
             case 7:
                 getCountOfPersons();
+                break;
+            case 8:
+                sortAlphabetically();
+                break;
+            case 9:
+                //sortCityStateOrZip();
                 break;
             case 0:
                 conditon = false;
@@ -227,5 +237,11 @@ public class AddressBookImplement implements MultipleAddressBook {
             System.out.println(city.get(location));
         else
             System.out.println("no records found");
+    }
+
+    public void sortAlphabetically() {
+        book.entrySet().stream().
+                sorted(Map.Entry.comparingByKey())
+                .forEach(System.out::println);
     }
 }
