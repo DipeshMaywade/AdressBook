@@ -188,7 +188,7 @@ public class AddressBookImplement implements MultipleAddressBook {
                 sortAlphabetically();
                 break;
             case 9:
-                //sortCityStateOrZip();
+                sortCityStateOrZip();
                 break;
             case 0:
                 conditon = false;
@@ -240,8 +240,30 @@ public class AddressBookImplement implements MultipleAddressBook {
     }
 
     public void sortAlphabetically() {
-        book.entrySet().stream().
-                sorted(Map.Entry.comparingByKey())
-                .forEach(System.out::println);
+        book.entrySet().stream()
+                        .sorted(Map.Entry.comparingByKey())
+                        .forEach(System.out::println);
+    }
+
+    public void sortCityStateOrZip() {
+        System.out.println("sort by 1:city 2:state 3:zip");
+        int check = obj.nextInt();
+        switch (check) {
+            case 1:
+                city.entrySet().stream()
+                               .sorted(Map.Entry.comparingByKey())
+                               .forEach(System.out::println);
+                break;
+            case 2:
+                state.entrySet().stream()
+                                .sorted(Map.Entry.comparingByKey())
+                                .forEach(System.out::println);
+                break;
+            case 3:
+                zip.entrySet().stream()
+                              .sorted(Map.Entry.comparingByKey())
+                              .forEach(System.out::println);
+                break;
+        }
     }
 }
