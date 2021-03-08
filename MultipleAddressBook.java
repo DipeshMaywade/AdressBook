@@ -23,6 +23,10 @@ interface MultipleAddressBook {
 
     public void sortCityStateOrZip();
 
+    public void writeAddressBookInFiles(AddressBookImplement.IOService ioService);
+
+    public void readAddressBookInFiles(AddressBookImplement.IOService ioService);
+
 }
 
 class AddressBook {

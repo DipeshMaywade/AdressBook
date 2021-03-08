@@ -1,6 +1,9 @@
 import java.util.*;
 
 public class AddressBookImplement implements MultipleAddressBook {
+
+    public enum IOService{CONSOLE_IO,FILE_IO,DB_IO,REST_IO}
+
     public Map<String, AddressBook> book;
     public Map<String, ArrayList<AddressBook>> multibook;
     public Map<String, ArrayList<AddressBook>> city;
@@ -41,25 +44,27 @@ public class AddressBookImplement implements MultipleAddressBook {
         String bookName = obj.next();
         System.out.println("Enter you first name");
         String firstName = obj.next();
-        System.out.println("Enter you last name");
-        String lastName = obj.next();
-        obj.nextLine();
-        System.out.println("Enter you Address name");
-        String address = obj.nextLine();
-        System.out.println("Enter you zip ");
-        int zip = obj.nextInt();
-        System.out.println("Enter you city name");
-        String city = obj.next();
-        System.out.println("Enter you state name");
-        String state = obj.next();
-        obj.nextLine();
-        System.out.println("Enter you phone number");
-        long phoneNumber = obj.nextLong();
-        obj.nextLine();
-        System.out.println("Enter you email name");
-        String email = obj.nextLine();
-        if (equals(firstName))
+
+        if (equals(firstName)) {
+            System.out.println("Enter you last name");
+            String lastName = obj.next();
+            obj.nextLine();
+            System.out.println("Enter you Address name");
+            String address = obj.nextLine();
+            System.out.println("Enter you zip ");
+            int zip = obj.nextInt();
+            System.out.println("Enter you city name");
+            String city = obj.next();
+            System.out.println("Enter you state name");
+            String state = obj.next();
+            obj.nextLine();
+            System.out.println("Enter you phone number");
+            long phoneNumber = obj.nextLong();
+            obj.nextLine();
+            System.out.println("Enter you email name");
+            String email = obj.nextLine();
             addAddressBook(bookName, firstName, lastName, address, city, zip, state, phoneNumber, email);
+        }
         else
             System.out.println("the Name already exist in contact please use different name");
     }
@@ -152,13 +157,18 @@ public class AddressBookImplement implements MultipleAddressBook {
     public void deleteEntry() {
         System.out.println("enter your name to delete from contact");
         String name = obj.next();
-        book.remove(name);
+        AddressBook a = book.get(name);
+        if(equals(a)) {
+            System.out.println("Entry Not Exist");
+        }
+        else
+            book.remove(a);
     }
 
     // This method helps user to choose action
     public boolean makeChoice() {
-        System.out.println("enter 1:add_contact 2:view_by_city 3-view_by_state 4:edit_contact 5:delete_contact" +
-                " 6:person_by_city_or_state 7:get_count_of_person 8:sort_alphabetically 9:sort_viaCityStateZip or 0 to quit");
+        System.out.println("enter 1:add_contact \n2:view_by_city \n3-view_by_state \n4:edit_contact \n5:delete_contact" +
+                " \n6:person_by_city_or_state \n7:get_count_of_person \n8:sort_alphabetically \n9:sort_viaCityStateZip \n10: Write address in system file \n11: Read address in system file or 0 to quit");
         int check = obj.nextInt();
         boolean conditon = true;
         switch (check) {
@@ -189,6 +199,11 @@ public class AddressBookImplement implements MultipleAddressBook {
             case 9:
                 sortCityStateOrZip();
                 break;
+            case 10:
+                writeAddressBookInFiles(IOService.FILE_IO);
+                break;
+            case 11:
+                readAddressBookInFiles(IOService.FILE_IO);                break;
             case 0:
                 conditon = false;
                 break;
@@ -203,6 +218,11 @@ public class AddressBookImplement implements MultipleAddressBook {
     }
 
     public void viewPersonByCity() {
+//        Set<String> keys = multibook.keySet();
+//        System.out.println(keys);
+//        String bookName = obj.next();
+//        System.out.println(multibook.get(bookName));
+
         System.out.println("Enter city");
         String location = obj.next();
         obj.nextLine();
@@ -265,4 +285,19 @@ public class AddressBookImplement implements MultipleAddressBook {
                 break;
         }
     }
+
+    public void writeAddressBookInFiles(IOService ioService){
+        if (ioService.equals(IOService.FILE_IO)) {
+            new AdressBookFileIO().writeData(entries);
+            System.out.println("Data stored successfully in /IdeaProjects/AddressBook/AddressBook.txt");
+        }
+    }
+
+    public void readAddressBookInFiles(IOService ioService){
+        if (ioService.equals(IOService.FILE_IO)) {
+            new AdressBookFileIO().readData();
+            System.out.println("Data Read successfully From /IdeaProjects/AddressBook/AddressBook.txt");
+        }
+    }
+
 }
