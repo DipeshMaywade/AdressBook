@@ -30,7 +30,7 @@
 ### Used Case:16
 #### Ability to read the data of contact from DataBase Table
 ### Used Case:17
-####Ability to update the Contact Information in the address book for a person and ensure that the Contact Information in the memory is in Sync with the DB
+#### Ability to update the Contact Information in the address book for a person and ensure that the Contact Information in the memory is in Sync with the DB
 ### Used Case:19
 #### Ability to Retrieve number of Contacts in the Database by City or State.
 ### Used Case:20
