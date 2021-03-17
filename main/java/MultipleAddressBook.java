@@ -44,5 +44,8 @@ interface MultipleAddressBook {
     public void updateAddressBook(String name, String address);
 
     AddressBook getAddressBookData(String name);
+
+    public List<AddressBook> readFilteredAddressBookData(String stateName);
+
 }
 
