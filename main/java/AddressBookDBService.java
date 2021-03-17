@@ -4,6 +4,8 @@ import java.util.List;
 
 public class AddressBookDBService {
 
+    private PreparedStatement addressBookDataStatement;
+
     private Connection getConnection() throws SQLException {
         String jdbcULR = "jdbc:mysql://localhost:3306/address_book_service?useSSL=false";
         String userName = "root";
@@ -48,5 +50,40 @@ public class AddressBookDBService {
             e.printStackTrace();
         }
         return addressBookList;
+    }
+
+    public int updateAdressBookData(String name, String address) {
+        String sql = String.format("update address_book set address = '%s' where first_name = '%s';",address,name);
+        try (Connection connection = this.getConnection()) {
+            Statement statement = connection.createStatement();
+            return statement.executeUpdate(sql);
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
+    public List<AddressBook> getAddressBookData(String name) {
+        List<AddressBook>addressBookList = null;
+        if (this.addressBookDataStatement==null)
+            this.preparedStatementForAddressBookData();
+        try {
+            addressBookDataStatement.setString(1,name);
+            ResultSet resultSet = addressBookDataStatement.executeQuery();
+            addressBookList = this.getAddressBookData(resultSet);
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return addressBookList;
+    }
+
+    private void preparedStatementForAddressBookData() {
+        try {
+            Connection connection = this.getConnection();
+            String sql = "select * from address_book where first_name= ?;";
+            addressBookDataStatement = connection.prepareStatement(sql);
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
     }
 }

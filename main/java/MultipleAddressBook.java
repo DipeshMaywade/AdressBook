@@ -38,5 +38,11 @@ interface MultipleAddressBook {
     public void readAddressBookInCSV() throws IOException;
 
     public List<AddressBook> readAddressBookData();
+
+    public boolean checkAddressBookSyncWithDB(String name);
+
+    public void updateAddressBook(String name, String address);
+
+    AddressBook getAddressBookData(String name);
 }
 

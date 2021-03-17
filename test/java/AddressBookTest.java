@@ -12,5 +12,14 @@ public class AddressBookTest {
         Assertions.assertEquals(3, addressBookList.size());
     }
 
+    @Test
+    void givenNewAddressForContact_whenUpdate_shouldSyncWithDB() {
+        AddressBookImplement addressBookImplement = new AddressBookImplement();
+        List<AddressBook> employeePayrollData = addressBookImplement.readAddressBookData();
+        addressBookImplement.updateAddressBook("ram", "Dehli");
+        boolean result = addressBookImplement.checkAddressBookSyncWithDB("ram");
+        Assertions.assertEquals(true, result);
+    }
+
 
 }

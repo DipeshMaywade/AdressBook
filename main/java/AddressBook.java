@@ -1,3 +1,5 @@
+import java.util.Objects;
+
 public class AddressBook {
     public String bookName;
     public String firstName;
@@ -20,7 +22,14 @@ public class AddressBook {
         this.state = state;
         this.phoneNumber = phoneNumber;
         this.email = email;
+    }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        AddressBook that = (AddressBook) o;
+        return zip == that.zip && phoneNumber == that.phoneNumber && Objects.equals(bookName, that.bookName) && Objects.equals(firstName, that.firstName) && Objects.equals(lastName, that.lastName) && Objects.equals(address, that.address) && Objects.equals(city, that.city) && Objects.equals(state, that.state) && Objects.equals(email, that.email);
     }
 
     @Override
