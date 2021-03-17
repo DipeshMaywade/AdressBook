@@ -22,9 +22,6 @@ public class AddressBook {
         this.email = email;
 
     }
-    public AddressBook(){
-
-    }
 
     @Override
     public String toString() {

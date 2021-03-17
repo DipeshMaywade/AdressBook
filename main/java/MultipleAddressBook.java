@@ -2,6 +2,7 @@ import com.opencsv.exceptions.CsvDataTypeMismatchException;
 import com.opencsv.exceptions.CsvRequiredFieldEmptyException;
 
 import java.io.IOException;
+import java.util.List;
 
 interface MultipleAddressBook {
 
@@ -35,5 +36,7 @@ interface MultipleAddressBook {
     public void writeAddressBookInCSV() throws CsvRequiredFieldEmptyException, IOException, CsvDataTypeMismatchException;
 
     public void readAddressBookInCSV() throws IOException;
+
+    public List<AddressBook> readAddressBookData();
 }
 
