@@ -27,3 +27,11 @@
 #### Ability to read or write the address book with Persons Contact into File using FileIO
 ### Used Case:14
 #### Ability to read or write the address book with Persons Contact into File using CSV File
+### Used Case:16
+#### Ability to read the data of contact from DataBase Table
+### Used Case:17
+#### Ability to update the Contact Information in the address book for a person and ensure that the Contact Information in the memory is in Sync with the DB
+### Used Case:19
+#### Ability to Retrieve number of Contacts in the Database by City or State.
+### Used Case:20
+#### Ability to Add new Contact to the Address Book Database.
