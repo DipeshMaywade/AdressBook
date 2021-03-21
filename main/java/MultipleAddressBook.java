@@ -40,7 +40,7 @@ interface MultipleAddressBook {
 
     boolean checkAddressBookSyncWithDB(String name);
 
-    void updateAddressBook(String name, String address);
+    public void updateAddressBook(String name, String address, AddressBookImplement.IOService ioService);
 
     AddressBook getAddressBookData(String name);
 
@@ -51,5 +51,6 @@ interface MultipleAddressBook {
     long countEntries();
 
     void addContactDBWithThreads(List<AddressBook> addressBooks);
+
 }
 

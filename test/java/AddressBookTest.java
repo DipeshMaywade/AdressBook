@@ -22,7 +22,7 @@ public class AddressBookTest {
     void givenNewAddressForContact_whenUpdate_shouldSyncWithDB() {
         AddressBookImplement addressBookImplement = new AddressBookImplement();
         List<AddressBook> employeePayrollData = addressBookImplement.readAddressBookData();
-        addressBookImplement.updateAddressBook("ram", "Dehli");
+        addressBookImplement.updateAddressBook("ram", "Dehli", AddressBookImplement.IOService.DB_IO);
         boolean result = addressBookImplement.checkAddressBookSyncWithDB("ram");
         Assertions.assertEquals(true, result);
     }
@@ -114,5 +114,23 @@ public class AddressBookTest {
         }
         long entries = addressBookImplement.countEntries();
         Assertions.assertEquals(5,entries);
+    }
+
+    @Test
+    void givenNewSalaryForEmp_whenUpdateShouldMatch200Response() {
+        AddressBookImplement addressBookImplement;
+        AddressBook[] addressBookData = getContactList();
+        addressBookImplement = new AddressBookImplement(Arrays.asList(addressBookData));
+
+        addressBookImplement.updateAddressBook("Dipesh","Dehli", AddressBookImplement.IOService.REST_IO);
+        AddressBook data = addressBookImplement.getAddressBookData("Dipesh");
+
+        String empJson = new Gson().toJson(data);
+        RequestSpecification requestSpecification = RestAssured.given();
+        requestSpecification.header("Content-Type","application/json");
+        requestSpecification.body(empJson);
+        Response response = requestSpecification.put("/address_book/"+data.id);
+        int statusCode = response.getStatusCode();
+        Assertions.assertEquals(200,statusCode);
     }
 }

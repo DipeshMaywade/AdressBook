@@ -334,10 +334,12 @@ public class AddressBookImplement implements MultipleAddressBook {
 
     }
 
-    public void updateAddressBook(String name, String address) {
-        AddressBookDBService addressBookDBService = new AddressBookDBService();
-        int result = addressBookDBService.updateAdressBookData(name,address);
-        if (result == 0) return;
+    public void updateAddressBook(String name, String address,IOService ioService) {
+        if (ioService.equals(IOService.DB_IO)) {
+            AddressBookDBService addressBookDBService = new AddressBookDBService();
+            int result = addressBookDBService.updateAdressBookData(name, address);
+            if (result == 0) return;
+        }
         AddressBook addressBook = this.getAddressBookData(name);
         if (addressBook != null) addressBook.address= address;
     }
@@ -390,5 +392,4 @@ public class AddressBookImplement implements MultipleAddressBook {
     public void addContacts(AddressBook addressBookData) {
         entries.add(addressBookData);
     }
-
 }
