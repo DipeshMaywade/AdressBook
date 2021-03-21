@@ -37,3 +37,11 @@
 #### Ability to Add new Contact to the Address Book Database.
 ### Used Case:21
 #### Ability to Add multiple Contact to the Address Book Database Using multiple threads.
+### Used Case:22
+#### Ability to Read multiple Contact to the Address_Book.json Using JSON-Server(REST_IO).
+### Used Case:23
+#### Ability to Add multiple Contact to the Address_Book Database Using JSON-Server.
+### Used Case:24
+#### Ability to Update Contact to the Address_Book Database Using JSON-Server.
+### Used Case:25
+#### Ability to Delete Contact to the Address_Book Database Using JSON-Server
