@@ -1,6 +1,7 @@
 import java.util.Objects;
 
 public class AddressBook {
+    public int id;
     public String bookName;
     public String firstName;
     public String lastName;
@@ -13,6 +14,20 @@ public class AddressBook {
 
     public AddressBook(String bookName, String firstName, String lastName, String address, String city, int zip,
                        String state, long phoneNumber, String email) {
+        this.bookName = bookName;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.address = address;
+        this.city = city;
+        this.zip = zip;
+        this.state = state;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+    }
+
+    public AddressBook(int id,String bookName, String firstName, String lastName, String address, String city, int zip,
+                       String state, long phoneNumber, String email) {
+        this.id = id;
         this.bookName = bookName;
         this.firstName = firstName;
         this.lastName = lastName;

@@ -386,4 +386,9 @@ public class AddressBookImplement implements MultipleAddressBook {
         }
         System.out.println(addressBooks);
     }
+
+    public void addContacts(AddressBook addressBookData) {
+        entries.add(addressBookData);
+    }
+
 }
