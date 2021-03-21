@@ -5,6 +5,10 @@ import java.util.*;
 
 public class AddressBookImplement implements MultipleAddressBook {
 
+    public AddressBookImplement(List<AddressBook> asList) {
+        this.entries = new ArrayList<>(asList);
+    }
+
     public enum IOService{CONSOLE_IO,FILE_IO,DB_IO,REST_IO}
 
     public Map<String, AddressBook> book;
@@ -265,8 +269,8 @@ public class AddressBookImplement implements MultipleAddressBook {
 
     public void sortAlphabetically() {
         book.entrySet().stream()
-                        .sorted(Map.Entry.comparingByKey())
-                        .forEach(System.out::println);
+                .sorted(Map.Entry.comparingByKey())
+                .forEach(System.out::println);
     }
 
     public void sortCityStateOrZip() {
@@ -275,18 +279,18 @@ public class AddressBookImplement implements MultipleAddressBook {
         switch (check) {
             case 1:
                 city.entrySet().stream()
-                               .sorted(Map.Entry.comparingByKey())
-                               .forEach(System.out::println);
+                        .sorted(Map.Entry.comparingByKey())
+                        .forEach(System.out::println);
                 break;
             case 2:
                 state.entrySet().stream()
-                                .sorted(Map.Entry.comparingByKey())
-                                .forEach(System.out::println);
+                        .sorted(Map.Entry.comparingByKey())
+                        .forEach(System.out::println);
                 break;
             case 3:
                 zip.entrySet().stream()
-                              .sorted(Map.Entry.comparingByKey())
-                              .forEach(System.out::println);
+                        .sorted(Map.Entry.comparingByKey())
+                        .forEach(System.out::println);
                 break;
         }
     }
@@ -306,8 +310,8 @@ public class AddressBookImplement implements MultipleAddressBook {
     }
 
     public void writeAddressBookInCSV() throws CsvRequiredFieldEmptyException, IOException, CsvDataTypeMismatchException {
-       OpenCSVWriter openCSVWriter = new OpenCSVWriter();
-       openCSVWriter.writeData();
+        OpenCSVWriter openCSVWriter = new OpenCSVWriter();
+        openCSVWriter.writeData();
     }
 
     public void readAddressBookInCSV() throws IOException {
@@ -324,7 +328,10 @@ public class AddressBookImplement implements MultipleAddressBook {
     public boolean checkAddressBookSyncWithDB(String name) {
         AddressBookDBService addressBookDBService = new AddressBookDBService();
         List<AddressBook>addressBookList= addressBookDBService.getAddressBookData(name);
+        System.out.println(addressBookList.get(0));
+        System.out.println(getAddressBookData(name));
         return addressBookList.get(0).equals(getAddressBookData(name));
+
     }
 
     public void updateAddressBook(String name, String address) {
@@ -355,6 +362,7 @@ public class AddressBookImplement implements MultipleAddressBook {
     }
 
     public long countEntries() {
+        System.out.println(entries);
         return entries.size();
     }
 

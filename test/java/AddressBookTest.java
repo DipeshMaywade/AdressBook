@@ -1,3 +1,4 @@
+import com.google.gson.Gson;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -59,5 +60,27 @@ public class AddressBookTest {
         Instant threadEnd = Instant.now();
         System.out.println("Duration with thread  " + Duration.between(threadStart, threadEnd));
         Assertions.assertEquals(11, addressBookImplement.countEntries());
+    }
+
+    public void setup(){
+        RestAssured.baseURI = "http://localhost";
+        RestAssured.port = 3000;
+    }
+
+    @Test
+    void givenEmployeeDataInJSONServer_WhenRetrieved_shouldMatchYheCount() {
+        AddressBook[] addressBooksData = getEmployeeList();
+        AddressBookImplement addressBookImplement;
+        addressBookImplement = new AddressBookImplement(Arrays.asList(addressBooksData));
+        long entries = addressBookImplement.countEntries();
+        Assertions.assertEquals(2,entries);
+    }
+
+    public AddressBook[] getEmployeeList() {
+        setup();
+        Response response = RestAssured.get("/address_book");
+        System.out.println("Employee Payroll Entries In JsonServer:\n"+ response.asString());
+        AddressBook[] arrayOfEmp = new Gson().fromJson(response.asString(),AddressBook[].class);
+        return arrayOfEmp ;
     }
 }
