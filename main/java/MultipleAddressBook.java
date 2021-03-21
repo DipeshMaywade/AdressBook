@@ -8,6 +8,7 @@ interface MultipleAddressBook {
 
     void addAddressBook(String bookName, String firstName, String lastName, String address, String city, int zip,
                         String state, long phoneNumber, String email);
+
     void getContact();
 
     boolean equals(String firstName);
@@ -52,5 +53,8 @@ interface MultipleAddressBook {
 
     void addContactDBWithThreads(List<AddressBook> addressBooks);
 
+    void addContacts(AddressBook addressBookData);
+
+    void deleteContactFromJSON(String firstName, AddressBookImplement.IOService ioService);
 }
 

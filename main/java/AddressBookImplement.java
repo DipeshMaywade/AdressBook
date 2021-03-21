@@ -392,4 +392,11 @@ public class AddressBookImplement implements MultipleAddressBook {
     public void addContacts(AddressBook addressBookData) {
         entries.add(addressBookData);
     }
+
+    public void deleteContactFromJSON(String firstName, IOService ioService) {
+        if (ioService.equals(IOService.REST_IO)) {
+            AddressBook addressBookData = this.getAddressBookData(firstName);
+            entries.remove(addressBookData);
+        }
+    }
 }

@@ -100,7 +100,7 @@ public class AddressBookTest {
         addressBookImplement = new AddressBookImplement(Arrays.asList(addressBooksData));
 
         AddressBook[] data = {
-                new AddressBook(1,"book0", "Rohit", "Maywade", "mumbai", "mumbai", 456536, "mh", 345634566, "gg@gmail.com"),
+                new AddressBook(2,"book0", "Rohit", "Maywade", "mumbai", "mumbai", 456536, "mh", 345634566, "gg@gmail.com"),
                 new AddressBook(0,"book4", "gsdf", "Maywade", "mumbai", "mumbai", 456536, "mh", 345634566, "gg@gmail.com"),
                 new AddressBook(0,"book5", "dgdf", "Maywade", "mumbai", "mumbai", 456536, "mh", 345634566, "gg@gmail.com")
         };
@@ -132,5 +132,23 @@ public class AddressBookTest {
         Response response = requestSpecification.put("/address_book/"+data.id);
         int statusCode = response.getStatusCode();
         Assertions.assertEquals(200,statusCode);
+    }
+
+    @Test
+    void givenContactToDelete_whenDelete_ShouldMatch200Response() {
+        AddressBookImplement addressBookImplement;
+        AddressBook[] addressBookData = getContactList();
+        addressBookImplement = new AddressBookImplement(Arrays.asList(addressBookData));
+
+        AddressBook data = addressBookImplement.getAddressBookData("Rohit");
+        RequestSpecification requestSpecification = RestAssured.given();
+        requestSpecification.header("Content-Type","application/json");
+        Response response = requestSpecification.delete("/address_book/"+data.id);
+        int statusCode = response.getStatusCode();
+        Assertions.assertEquals(200,statusCode);
+
+        addressBookImplement.deleteContactFromJSON(data.firstName, AddressBookImplement.IOService.REST_IO);
+        long entries = addressBookImplement.countEntries();
+        Assertions.assertEquals(1,entries);
     }
 }
